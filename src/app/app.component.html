@@ -1,3 +1,44 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu side="start" menuId="m1">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Our Care</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-menu-toggle>
+          <ion-item lines="none" routerLink="">
+            <ion-icon name="calendar-outline" slot="start" color="primary"></ion-icon>
+            <ion-label>Schedules</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        
+        <ion-menu-toggle>
+          <ion-item lines="none" routerLink="/bookings">
+            <ion-icon name="people-outline" slot="start" color="primary"></ion-icon>
+            <ion-label>Patients</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle>
+          <ion-item lines="none" routerLink="/bookings">
+            <ion-icon name="car-outline" slot="start" color="primary"></ion-icon>
+            <ion-label>Tour</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        
+        <ion-menu-toggle>
+          <ion-item lines="none" (click)="onLogout()" button>
+            <ion-icon name="exit" slot="start" color="primary"></ion-icon>
+            <ion-label>Logout</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        
+
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet main></ion-router-outlet>
 </ion-app>
