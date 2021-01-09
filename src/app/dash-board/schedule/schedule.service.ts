@@ -51,10 +51,10 @@ export class ScheduleService {
 
 
 export interface ISchedule{
-  id?: string,
-  title: string,
-  color?: string,
-  start: Date,
-  end: Date,
+  id?: string;
+  title: string;
+  color?: string;
+  start: Date;
+  end: Date;
   task?: Array<any>;
 }
