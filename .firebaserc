@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "caregiver-4a32e": {
+      "hosting": {
+        "app": [
+          "caregiver-4a32e"
+        ]
+      }
+    }
+  }
+}

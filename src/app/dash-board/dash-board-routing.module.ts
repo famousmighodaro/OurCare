@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: DashBoardPage
+  },
+  {
+    path: 'schedule',
+    loadChildren: () => import('./schedule/schedule.module').then( m => m.SchedulePageModule)
   }
 ];
 
