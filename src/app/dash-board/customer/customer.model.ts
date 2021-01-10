@@ -2,7 +2,7 @@ export class Customer{
     id?: string;
     name: string;
     hasPrescription: boolean;
-    precription: Array<any>;
+    prescription: Array<any>;
     contactPerson?: Array<any>;
     dateOfBirth: Date;
     address: string;

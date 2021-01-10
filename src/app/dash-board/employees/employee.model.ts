@@ -1,5 +1,5 @@
 import { Schedule } from "../schedule/schedule.model";
-export class User{
+export class Employee{
     name: string;
     level: number;
     profession: string;

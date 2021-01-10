@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button id="m1"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>employees</ion-title>
+
+    <ion-fab vertical="center" horizontal="end" slot="fixed" slot="end">
+      <ion-fab-button >
+        <ion-icon name="person-add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+
+  <ion-toolbar>
+    <ion-list>      
+      <ion-item>
+          <ion-label>Filter by:</ion-label>
+          <ion-select  [interfaceOptions]="filterOption" interface="action-sheet" placeholder="select one">
+            <ion-select-option value="f">Female</ion-select-option>
+            <ion-select-option value="m">Male</ion-select-option>
+          </ion-select>
+      </ion-item>
+
+    </ion-list>
+  </ion-toolbar>
+</ion-content>

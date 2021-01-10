@@ -13,12 +13,12 @@ const routes: Routes = [
     loadChildren: () => import('./schedule/schedule.module').then( m => m.SchedulePageModule)
   },
   {
-    path: 'user',
-    loadChildren: () => import('./user/user.module').then( m => m.UserPageModule)
-  },
-  {
     path: 'customer',
     loadChildren: () => import('./customer/customer.module').then( m => m.CustomerPageModule)
+  },
+  {
+    path: 'employees',
+    loadChildren: () => import('./employees/employees.module').then( m => m.EmployeesPageModule)
   }
 ];
 

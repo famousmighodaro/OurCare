@@ -71,12 +71,3 @@ export class SchedulePage implements OnInit {
  
 
 }
-
-export interface TasksEvent{
-  id?: string,
-  title: string,
-  color?: string,
-  start: Date,
-  end: Date,
-  task?: Array<any>;
-}
