@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
+import { Employee } from '../employee.model';
 
 @Component({
   selector: 'app-create-employee',
@@ -6,9 +9,33 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./create-employee.component.scss'],
 })
 export class CreateEmployeeComponent implements OnInit {
+  @Input()
+  welmsg: string;
+  @ViewChild('employeeForm')
+  form: NgForm;
+  employee: Employee;
+  constructor(private modalCtr: ModalController) { }
 
-  constructor() { }
+  ngOnInit() { }
 
-  ngOnInit() {}
+  onCreateNewEmployee() {
+    if (!this.form.valid) {
+      return;
+    }
+    this.modalCtr.dismiss({
+      employeeData: {
+        employee: new Employee(
+          this.form.value['first-name'],
+          this.form.value['last-name'],
+          this.form.value['date-of-birth'],
+          this.form.value['level'],
+          'new')
+      }
+    }, 'createEmployee', 'createEmployeeModalCtrl');
+  }
+
+  onCancleCreateNewEmployee() {
+    this.modalCtr.dismiss(null, 'cancle', 'createEmployeeModalCtrl');
+  }
 
 }
