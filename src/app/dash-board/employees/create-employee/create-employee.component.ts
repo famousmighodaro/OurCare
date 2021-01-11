@@ -1,8 +1,9 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
+import { EmployeeLevel } from '../level/level.model';
 import { Employee } from '../employee.model';
-import { EmployeeLevel } from '../../customer/level/level.model';
+
 
 @Component({
   selector: 'app-create-employee',

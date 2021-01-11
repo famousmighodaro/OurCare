@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
 import { EmployeeLevel } from './level.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +10,7 @@ export class EmployeeLevelService {
 
   constructor(private firestore: AngularFirestore) { }
 
-  getEmployeeLevels() {
-    return this.firestore.collection('level').valueChanges();
+  getEmployeeLevels(): Observable<EmployeeLevel[]> {
+    return this.firestore.collection<EmployeeLevel>('level').valueChanges();
   }
-
 }

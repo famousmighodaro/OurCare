@@ -1,15 +1,13 @@
-
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { CreateEmployeeComponent } from './create-employee/create-employee.component';
-import { Employee } from './employee.model';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { EmployeesService } from './employees.service';
 import { NgForm } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators'
-import { EmployeeLevelService } from '../customer/level/employee-level.service';
-import { EmployeeLevel } from '../customer/level/level.model';
+import { Employee } from './employee.model';
+import { EmployeesService } from './employees.service';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { CreateEmployeeComponent } from './create-employee/create-employee.component';
+import { EmployeeLevelService } from './level/employee-level.service';
+
+
 
 
 @Component({
@@ -21,23 +19,22 @@ export class EmployeesPage implements OnInit {
 
   employee: Employee;
   employees: any[] = [];
-  msg = "Welcome to me";
   form: NgForm;
-  filterOption: any = {
-    header: 'Filter by:',
-  }
 
-  levels: any[] = []
 
-  constructor(private createEmployeeModalCtrl: ModalController,
+  levels: any[] = [];
+
+  constructor(
+    private createEmployeeModalCtrl: ModalController,
     private employeeService: EmployeesService,
+    private employeeLevelService: EmployeeLevelService,
     private firestore: AngularFirestore,
-    private employeeLevelService: EmployeeLevelService) { }
+  ) { }
 
   ngOnInit() {
     this.getEmployees();
     this.employeeLevelService.getEmployeeLevels().subscribe(responses => {
-      this.levels = responses
+      this.levels = responses;
     });
 
 
@@ -78,10 +75,7 @@ export class EmployeesPage implements OnInit {
   getEmployees() {
     this.employeeService.getAllEmployee().subscribe(response => {
       this.employees = response;
-    })
+    });
   }
 
 }
-
-
-

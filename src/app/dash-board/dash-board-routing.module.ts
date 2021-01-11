@@ -10,15 +10,16 @@ const routes: Routes = [
   },
   {
     path: 'schedule',
-    loadChildren: () => import('./schedule/schedule.module').then( m => m.SchedulePageModule)
+    loadChildren: () => import('./schedule/schedule.module').then(m => m.SchedulePageModule)
   },
-  {
-    path: 'customer',
-    loadChildren: () => import('./customer/customer.module').then( m => m.CustomerPageModule)
-  },
+
   {
     path: 'employees',
-    loadChildren: () => import('./employees/employees.module').then( m => m.EmployeesPageModule)
+    loadChildren: () => import('./employees/employees.module').then(m => m.EmployeesPageModule)
+  },
+  {
+    path: 'customers',
+    loadChildren: () => import('./customers/customers.module').then(m => m.CustomersPageModule)
   }
 ];
 
@@ -26,4 +27,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class DashBoardPageRoutingModule {}
+export class DashBoardPageRoutingModule { }

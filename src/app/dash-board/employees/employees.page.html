@@ -19,10 +19,7 @@
   <ion-toolbar>
     <ion-list>
       <ion-item>
-        <ion-input name="belly" ngModel (ngModelChange)="onSelectLevelChanges($event)"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Filter by:</ion-label>
+        <ion-label>Filter by Profession</ion-label>
 
         <ion-select ngModel (ngModelChange)="onSelectLevelChanges($event)" #selectMe [interfaceOptions]="filterOption"
           interface="action-sheet" placeholder="select one">
