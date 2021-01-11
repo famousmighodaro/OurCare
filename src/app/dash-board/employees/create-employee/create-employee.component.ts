@@ -28,7 +28,7 @@ export class CreateEmployeeComponent implements OnInit {
           this.form.value['first-name'],
           this.form.value['last-name'],
           this.form.value['date-of-birth'],
-          this.form.value['level'],
+          +this.form.value['level'],
           'new')
       }
     }, 'createEmployee', 'createEmployeeModalCtrl');

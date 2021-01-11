@@ -4,6 +4,7 @@ import { CreateEmployeeComponent } from './create-employee/create-employee.compo
 import { Employee } from './employee.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { EmployeesService } from './employees.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-employees',
@@ -11,14 +12,28 @@ import { EmployeesService } from './employees.service';
   styleUrls: ['./employees.page.scss'],
 })
 export class EmployeesPage implements OnInit {
+
   employee: Employee;
+  employees: any[] = [];
   msg = "Welcome to me";
+  form: NgForm;
   filterOption: any = {
     header: 'Filter by:',
   }
-  constructor(private createEmployeeModalCtrl: ModalController, private employeeService: EmployeesService) { }
+
+  levels: any[] = [];
+  constructor(private createEmployeeModalCtrl: ModalController,
+    private employeeService: EmployeesService,
+    private firestore: AngularFirestore) { }
 
   ngOnInit() {
+    this.employeeService.getAllEmployee().subscribe(response => {
+      this.employees = response;
+    })
+    this.firestore.collection('level').valueChanges().subscribe(response => {
+      this.levels = response;
+    })
+
   }
 
   addEmployee() {
@@ -37,11 +52,23 @@ export class EmployeesPage implements OnInit {
       //console.log(resultData.data);
       if (resultData.role === "createEmployee") {
         this.employee = resultData.data.employeeData.employee;
-        console.log(this.employee.firstName);
         this.employeeService.createEmployee(this.employee);
       }
     });
 
+  }
+
+  onSelectLevelChanges(ev: any) {
+    if (+ev !== 0) {
+      this.employeeService.filterEmployeeBy(ev).subscribe(response => {
+        this.employees = response;
+      });
+      return;
+    }
+
+    this.employeeService.getAllEmployee().subscribe(response => {
+      this.employees = response;
+    })
   }
 
 }

@@ -31,4 +31,8 @@ export class EmployeesService {
   getAllEmployee(): Observable<Employee[]> {
     return this.firestore.collection<Employee>('users').valueChanges();
   }
+
+  filterEmployeeBy(filterBy: string): Observable<Employee[]> {
+    return this.firestore.collection<Employee>('users', ref => ref.where('level', '==', filterBy)).valueChanges();
+  }
 }
