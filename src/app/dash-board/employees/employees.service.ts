@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Employee } from './employee.model';
 
 @Injectable({
@@ -29,7 +30,12 @@ export class EmployeesService {
   }
 
   getAllEmployee(): Observable<Employee[]> {
-    return this.firestore.collection<Employee>('users').valueChanges();
+    return this.firestore.collection<Employee>('users').snapshotChanges().pipe(
+      map(actions => actions.map(responseData => {
+        const data = responseData.payload.doc.data();
+        const id = responseData.payload.doc.id;
+        return { id, ...data };
+      })));
   }
 
   filterEmployeeBy(filterBy: string): Observable<Employee[]> {

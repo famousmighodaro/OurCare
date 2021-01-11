@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { Employee } from '../employee.model';
+import { EmployeeLevel } from '../../customer/level/level.model';
 
 @Component({
   selector: 'app-create-employee',
@@ -10,7 +11,7 @@ import { Employee } from '../employee.model';
 })
 export class CreateEmployeeComponent implements OnInit {
   @Input()
-  welmsg: string;
+  employeeLevels: EmployeeLevel;
   @ViewChild('employeeForm')
   form: NgForm;
   employee: Employee;

@@ -1,10 +1,16 @@
+
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { CreateEmployeeComponent } from './create-employee/create-employee.component';
 import { Employee } from './employee.model';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { EmployeesService } from './employees.service';
 import { NgForm } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators'
+import { EmployeeLevelService } from '../customer/level/employee-level.service';
+import { EmployeeLevel } from '../customer/level/level.model';
+
 
 @Component({
   selector: 'app-employees',
@@ -21,28 +27,30 @@ export class EmployeesPage implements OnInit {
     header: 'Filter by:',
   }
 
-  levels: any[] = [];
+  levels: any[] = []
+
   constructor(private createEmployeeModalCtrl: ModalController,
     private employeeService: EmployeesService,
-    private firestore: AngularFirestore) { }
+    private firestore: AngularFirestore,
+    private employeeLevelService: EmployeeLevelService) { }
 
   ngOnInit() {
-    this.employeeService.getAllEmployee().subscribe(response => {
-      this.employees = response;
-    })
-    this.firestore.collection('level').valueChanges().subscribe(response => {
-      this.levels = response;
-    })
+    this.getEmployees();
+    this.employeeLevelService.getEmployeeLevels().subscribe(responses => {
+      this.levels = responses
+    });
+
 
   }
 
   addEmployee() {
     console.log("add employee");
 
+
     this.createEmployeeModalCtrl.create({
       component: CreateEmployeeComponent,
       componentProps: {
-        employee: Employee
+        employeeLevels: this.levels
       },
       id: "createEmployeeModalCtrl"
     }).then(modalEle => {
@@ -55,7 +63,6 @@ export class EmployeesPage implements OnInit {
         this.employeeService.createEmployee(this.employee);
       }
     });
-
   }
 
   onSelectLevelChanges(ev: any) {
@@ -65,10 +72,16 @@ export class EmployeesPage implements OnInit {
       });
       return;
     }
+    this.getEmployees();
+  }
 
+  getEmployees() {
     this.employeeService.getAllEmployee().subscribe(response => {
       this.employees = response;
     })
   }
 
 }
+
+
+
