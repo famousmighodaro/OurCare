@@ -21,8 +21,8 @@
       <ion-item>
         <ion-label>Filter by Profession</ion-label>
 
-        <ion-select ngModel (ngModelChange)="onSelectLevelChanges($event)" #selectMe [interfaceOptions]="filterOption"
-          interface="action-sheet" placeholder="select one">
+        <ion-select ngModel (ngModelChange)="onSelectLevelChanges($event)" #selectMe interface="action-sheet"
+          placeholder="select one">
           <ion-select-option value="0">All</ion-select-option>
           <ion-select-option *ngFor="let level of levels " [value]="level.id">{{level.title}}</ion-select-option>
         </ion-select>

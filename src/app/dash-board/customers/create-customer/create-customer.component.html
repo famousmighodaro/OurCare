@@ -1,3 +1,74 @@
-<p>
-  create-customer works!
-</p>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>New Customer</ion-title>
+
+    <ion-buttons slot="primary">
+      <ion-button (click)="onCancleCreateNewCustomer()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="onCreateNewcustomer()" #customerForm="ngForm">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-sm="8" offset-sm="2">
+          <ion-list>
+            <ion-item>
+              <ion-label position="floating">Frist Name</ion-label>
+              <ion-input type="text" name="first-name" required autocomplete autosuggest></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12" size-sm="8" offset-sm="2">
+          <ion-list>
+            <ion-item>
+              <ion-label position="floating">Last Name</ion-label>
+              <ion-input type="text" ngModel name="last-name" required autocomplete autosuggest></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12" size-sm="8" offset-sm="2">
+          <ion-list>
+            <ion-item>
+              <ion-label>Date</ion-label>
+              <ion-datetime display-format="DD.MMM.YYYY" ngModel name="date-of-birth" required></ion-datetime>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12" size-sm="8" offset-sm="2">
+          <ion-list>
+            <ion-item>
+              <ion-label position="floating">Level</ion-label>
+              <ion-select interface="action-sheet" placeholder="select level" ngModel name="level" required>
+                <ion-select-option>
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12" size-sm="8" offset-sm="2">
+
+          <ion-button color="primary" type="submit" [disabled]="!customerForm.valid">Add
+            new Employee</ion-button>
+          <ion-button color="primary" (click)="onCancleCreateNewCustomer()" fill="outline">Cancel
+          </ion-button>
+
+
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+  </form>
+
+</ion-content>
