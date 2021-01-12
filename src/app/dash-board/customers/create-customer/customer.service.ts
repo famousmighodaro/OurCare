@@ -14,11 +14,17 @@ export class CustomerService {
   ) { }
 
   createCustomer(customer: Customer) {
-    this.firestore.collection<Customer>('customer').doc().set(customer);
+    this.firestore.collection('customers').add({
+      firstName: customer.firstName,
+      lastName: customer.lastName,
+      dateOfBirth: new Date(customer.dateOfBirth),
+      level: +customer.level,
+      status: customer.status
+    });
   }
 
   geAllCustomers(): Observable<Customer[]> {
-    return this.firestore.collection<Customer>('customer').snapshotChanges().pipe(
+    return this.firestore.collection<Customer>('customers').snapshotChanges().pipe(
       map(actions => actions.map(resultData => {
         const data = resultData.payload.doc.data() as Customer;
         const id = resultData.payload.doc.id;

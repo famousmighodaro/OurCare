@@ -1,10 +1,14 @@
 import { Prescription } from './prescription.model';
 import { Observable } from 'rxjs';
-export interface Customer {
-    firstName: string;
-    lastName: string;
-    dateOfBirth: Date;
-    level: number;
-    status: string;
-    prescription?: Observable<Prescription[]>;
+export class Customer {
+
+    constructor(
+        public firstName: string,
+        public lastName: string,
+        public dateOfBirth: Date,
+        public level: number,
+        public status: string = "Inactive",
+        public prescription?: Observable<Prescription[]>,
+    ) { }
+
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { CreateCustomerComponent } from './create-customer/create-customer.component';
+import { Customer } from './customer.model';
+import { CustomerService } from './create-customer/customer.service';
 
 @Component({
   selector: 'app-customers',
@@ -9,7 +11,11 @@ import { CreateCustomerComponent } from './create-customer/create-customer.compo
 })
 export class CustomersPage implements OnInit {
 
-  constructor(private createCustomerModal: ModalController) { }
+  customer: Customer;
+  constructor(
+    private createCustomerModal: ModalController,
+    private customerService: CustomerService
+  ) { }
 
   ngOnInit() {
   }
@@ -25,7 +31,13 @@ export class CustomersPage implements OnInit {
 
     ).then(modalEle => {
       modalEle.present();
-    });
+      return modalEle.onDidDismiss();
+    }).then(resultData => {
+      if (resultData.role === "onCreateNewCustomer") {
+        this.customer = resultData.data.newCustomer.customer;
+        this.customerService.createCustomer(this.customer);
+      }
+    })
   }
 
 }
