@@ -23,7 +23,7 @@ export class CustomerService {
     });
   }
 
-  geAllCustomers(): Observable<Customer[]> {
+  getAllCustomers(): Observable<Customer[]> {
     return this.firestore.collection<Customer>('customers').snapshotChanges().pipe(
       map(actions => actions.map(resultData => {
         const data = resultData.payload.doc.data() as Customer;

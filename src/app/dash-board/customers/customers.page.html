@@ -17,13 +17,13 @@
   <ion-grid>
     <ion-row>
       <ion-col size="12" size-sm="8" offset-sm="2">
-        <ion-list>
-          <ion-item>
+        <ion-list *ngFor="let customer of customers">
+          <ion-item detail>
             <ion-label class="ion-margin-end">
-              <h1>We are the one</h1>
-              <div>
-                <p>Inactive</p>
-                <p>Level</p>
+              <h2> <strong>Name: </strong>{{ customer.firstName +" "+ customer.lastName}}</h2>
+              <div class="list-content">
+                <p><strong>Status: </strong> {{customer.status}}</p>
+                <p><strong>Level:</strong> {{customer.level}}</p>
               </div>
             </ion-label>
           </ion-item>
