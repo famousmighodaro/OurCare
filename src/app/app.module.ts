@@ -14,13 +14,17 @@ import { MbscModule, MbscEventcalendar } from '@mobiscroll/angular';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment.prod';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { far } from '@fortawesome/free-regular-svg-icons'
+import { fab } from '@fortawesome/free-brands-svg-icons'
 
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [ 
-    MbscModule, BrowserModule, FormsModule, IonicModule.forRoot(), AppRoutingModule, 
+  imports: [
+    MbscModule, BrowserModule, FormsModule, IonicModule.forRoot(), AppRoutingModule,
     MbscModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule
@@ -28,8 +32,13 @@ import { environment } from '../environments/environment.prod';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    FontAwesomeModule
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+  constructor(library: FaIconLibrary) {
+    library.addIconPacks(fas, fab, far);
+  }
+}

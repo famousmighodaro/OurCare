@@ -5,11 +5,22 @@
 </ion-header>
 
 <ion-content>
+  <ion-button slots="icon-only">
+    <ion-icon name="home" slot="icon-only"></ion-icon>
+  </ion-button>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" interface="action-sheet">
-    <ion-fab-button (click)="onTreatment()" interface="action-sheet">
+    <ion-fab-button>
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
 
+    <ion-fab-list side="top">
+      <ion-fab-button color="primary" class="fab-icon-button" (click)="addMedication()">
+        <fa-icon icon="pills"></fa-icon>
+      </ion-fab-button>
+      <ion-fab-button color="primary">
+        <fa-icon icon="hot-tub"></fa-icon>
+      </ion-fab-button>
 
+    </ion-fab-list>
   </ion-fab>
 </ion-content>

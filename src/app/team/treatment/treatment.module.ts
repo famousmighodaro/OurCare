@@ -7,14 +7,19 @@ import { IonicModule } from '@ionic/angular';
 import { TreatmentPageRoutingModule } from './treatment-routing.module';
 
 import { TreatmentPage } from './treatment.page';
+import { CreateMedicationComponent } from './create-medication/create-medication.component';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TreatmentPageRoutingModule
+    TreatmentPageRoutingModule,
+    FontAwesomeModule,
   ],
-  declarations: [TreatmentPage]
+  declarations: [TreatmentPage, CreateMedicationComponent]
 })
-export class TreatmentPageModule {}
+export class TreatmentPageModule {
+
+}

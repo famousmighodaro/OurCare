@@ -1,5 +1,9 @@
+
 import { Component, OnInit } from '@angular/core';
-import { ActionSheetController } from '@ionic/angular';
+import { ModalController, ActionSheetController } from '@ionic/angular';
+import { CreateMedicationComponent } from './create-medication/create-medication.component';
+import { MedicationPage } from './medication/medication.page';
+
 
 @Component({
   selector: 'app-treatment',
@@ -8,34 +12,24 @@ import { ActionSheetController } from '@ionic/angular';
 })
 export class TreatmentPage implements OnInit {
 
-  constructor(private actionSheetCtrl: ActionSheetController) { }
+  constructor(
+    private addMedicationModalCtrl: ModalController,
+    private actionSheetCtrl: ActionSheetController,
+
+  ) { }
 
   ngOnInit() {
+
   }
 
   addMedication() {
-    console.log("add medication")
-  }
-  onTreatment() {
-    const actionSheet = this.actionSheetCtrl.create({
-      header: 'Treatment',
-      buttons: [
-        {
-          text: 'Medication',
-          role: 'medication',
-          handler: this.addMedication,
-        },
-        {
-          text: 'cleaning',
-          role: 'cleaning',
-          handler: this.addMedication,
-        },
-      ],
-
-    })
-    actionSheet.then(actionSheetEle => {
-      actionSheetEle.present();
-      console.log(actionSheet);
+    console.log("add medication");
+    this.addMedicationModalCtrl.create({
+      component: CreateMedicationComponent
+    }).then(modalEle => {
+      modalEle.present();
     });
   }
+
+
 }
