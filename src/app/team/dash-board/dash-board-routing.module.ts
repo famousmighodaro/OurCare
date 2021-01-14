@@ -6,7 +6,7 @@ import { DashBoardPage } from './dash-board.page';
 const routes: Routes = [
   {
     path: '',
-    component: DashBoardPage
+    component: DashBoardPage,
   },
   {
     path: 'schedule',
@@ -20,7 +20,10 @@ const routes: Routes = [
   {
     path: 'customers',
     loadChildren: () => import('./customers/customers.module').then(m => m.CustomersPageModule)
-  }
+  },
+
+
+
 ];
 
 @NgModule({

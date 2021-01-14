@@ -10,7 +10,8 @@ import { AngularFireModule } from '@angular/fire';
 
 
 import { SchedulePage } from './schedule.page';
-import { environment } from '../../../environments/environment.prod';
+import { environment } from 'src/environments/environment.prod';
+
 
 @NgModule({
   imports: [
@@ -27,4 +28,4 @@ import { environment } from '../../../environments/environment.prod';
   ],
   declarations: [SchedulePage]
 })
-export class SchedulePageModule {}
+export class SchedulePageModule { }

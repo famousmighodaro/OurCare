@@ -8,24 +8,15 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid >
+  <ion-grid>
     <ion-row class="ion-align-items-center ion-justify-content-center">
       <ion-col size="6" size-sm="4" offset-sm="2">
         <h5>Today progress</h5>
       </ion-col>
       <ion-col size="6" size-sm="4">
-        <circle-progress
-            [percent]="90"
-            [radius]="50"
-            [subtitle]="titlen(90)"
-            [responsive]="true"
-            [outerStrokeWidth]="5"
-            [innerStrokeWidth]="4"
-            [outerStrokeColor]="'#78C000'"
-            [innerStrokeColor]="'#C7E596'"
-            [animation]="true"
-            [animationDuration]="300"
-          ></circle-progress>
+        <circle-progress [percent]="90" [radius]="50" [subtitle]="titlen(90)" [responsive]="true" [outerStrokeWidth]="5"
+          [innerStrokeWidth]="4" [outerStrokeColor]="'#78C000'" [innerStrokeColor]="'#C7E596'" [animation]="true"
+          [animationDuration]="300"></circle-progress>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -34,4 +25,8 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  <ion-grid>
+
+  </ion-grid>
+
 </ion-content>

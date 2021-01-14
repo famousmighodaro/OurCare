@@ -8,21 +8,28 @@
     <ion-content>
       <ion-list>
         <ion-menu-toggle>
-          <ion-item lines="none" routerLink="./dash-board/schedule">
+          <ion-item lines="none" routerLink="./team/dash-board">
+            <ion-icon name="home" slot="start" color="primary"></ion-icon>
+            <ion-label>Dashboard</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle>
+          <ion-item lines="none" routerLink="./team/t/dash-board/schedule">
             <ion-icon name="calendar" slot="start" color="primary"></ion-icon>
             <ion-label>Schedules</ion-label>
           </ion-item>
         </ion-menu-toggle>
 
         <ion-menu-toggle>
-          <ion-item lines="none" routerLink="./dash-board/employees">
+          <ion-item lines="none" routerLink="./team/t/dash-board/employees">
             <ion-icon name="people-circle" slot="start" color="primary"></ion-icon>
             <ion-label>Staffs</ion-label>
           </ion-item>
         </ion-menu-toggle>
 
         <ion-menu-toggle>
-          <ion-item lines="none" routerLink="/dash-board/customers">
+          <ion-item lines="none" routerLink="./team/t/dash-board/customers">
             <ion-icon name="people" slot="start" color="primary"></ion-icon>
             <ion-label>Patients</ion-label>
           </ion-item>
@@ -46,6 +53,5 @@
       </ion-list>
     </ion-content>
   </ion-menu>
-
   <ion-router-outlet main id="m1"></ion-router-outlet>
 </ion-app>

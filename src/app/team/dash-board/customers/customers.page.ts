@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 })
 export class CustomersPage implements OnInit {
 
-  customers: any[] = [];
+  customers: Customer[] = [];
   newCustomer: Customer;
   constructor(
     private createCustomerModal: ModalController,
@@ -21,6 +21,7 @@ export class CustomersPage implements OnInit {
 
   ngOnInit() {
     this.getCustomers();
+
   }
 
   onOpenNewCustomerForm() {
@@ -44,8 +45,9 @@ export class CustomersPage implements OnInit {
   }
 
   getCustomers() {
-    this.customerService.getAllCustomers().subscribe(response => {
-      this.customers = response;
+    this.customerService.getAllCustomers().subscribe((respons) => {
+      this.customers = respons;
+
     })
   }
 
