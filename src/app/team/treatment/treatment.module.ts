@@ -10,6 +10,7 @@ import { TreatmentPage } from './treatment.page';
 import { CreateMedicationComponent } from './create-medication/create-medication.component';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+import { CreateHygieneCareComponent } from './create-hygiene-care/create-hygiene-care.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -18,7 +19,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
     TreatmentPageRoutingModule,
     FontAwesomeModule,
   ],
-  declarations: [TreatmentPage, CreateMedicationComponent]
+  declarations: [TreatmentPage, CreateMedicationComponent, CreateHygieneCareComponent]
 })
 export class TreatmentPageModule {
 

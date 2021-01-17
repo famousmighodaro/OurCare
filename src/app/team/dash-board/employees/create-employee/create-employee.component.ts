@@ -24,6 +24,7 @@ export class CreateEmployeeComponent implements OnInit {
     if (!this.form.valid) {
       return;
     }
+
     this.modalCtr.dismiss({
       employeeData: {
         employee: new Employee(

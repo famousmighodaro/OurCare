@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-button slots="icon-only">
+  <ion-button slots="icon-only" *ngIf="tryme">
     <ion-icon name="home" slot="icon-only"></ion-icon>
   </ion-button>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" interface="action-sheet">
@@ -17,7 +17,7 @@
       <ion-fab-button color="primary" class="fab-icon-button" (click)="addMedication()">
         <fa-icon icon="pills"></fa-icon>
       </ion-fab-button>
-      <ion-fab-button color="primary">
+      <ion-fab-button color="primary" (click)="addHygieneCare()">
         <fa-icon icon="hot-tub"></fa-icon>
       </ion-fab-button>
 
