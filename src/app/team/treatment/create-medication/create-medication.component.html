@@ -35,7 +35,7 @@
             <ion-select placeholder="Select intake frequency" interface="action-sheet"
               (ngModelChange)="onpillsCountChange()" [(ngModel)]="medication.intakeFrequency" name="intake-frequency"
               [value]="medication.intakeFrequency" required>
-              <ion-select-option value="">Select intake frequency</ion-select-option>
+
               <ion-select-option value="0">Once</ion-select-option>
               <ion-select-option value="1">Daily</ion-select-option>
               <ion-select-option value="2">Every 2 days</ion-select-option>
@@ -49,7 +49,7 @@
             </ion-input>
 
           </ion-item>
-          <div *ngIf="doseDetails">
+          <div *ngIf="showPillsIntakeDetail">
             <ion-item>
               <ion-label position="floating">Daily intake count</ion-label>
               <ion-select placeholder="Select how many times a day  " interface="action-sheet"

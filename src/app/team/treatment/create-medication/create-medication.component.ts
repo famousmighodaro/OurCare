@@ -15,9 +15,9 @@ export class CreateMedicationComponent implements OnInit {
   medication: Medication = {} as Medication;
   pillsCountFinished: number;
   searchCustomer: string;
-  @Input()
-  doseDetails: boolean;
-  doseDetail = false;
+
+  showPillsIntakeDetail = false;
+
   constructor(
     private modalCtrl: ModalController
   ) { }
@@ -32,12 +32,11 @@ export class CreateMedicationComponent implements OnInit {
     console.log(ev)
   }
   onpillsCountChange() {
-
-    if (this.form.value['intake-frequency'] == 0 || this.form.value['intake-frequency'] == '') {
-      this.doseDetails = false;
+    if (this.form.value['intake-frequency'] === undefined || this.form.value['intake-frequency'] === '' || +this.form.value['intake-frequency'] === 0) {
+      this.showPillsIntakeDetail = false;
       return;
     } else {
-      this.doseDetails = true;
+      this.showPillsIntakeDetail = true;
 
     }
 
@@ -50,18 +49,14 @@ export class CreateMedicationComponent implements OnInit {
 
       console.log(" all are checked");
       this.pillsCountFinished = (this.form.value['pills-count'] / (this.form.value['doses'] * this.form.value['day-intake-frequency'])) * this.form.value['intake-frequency'];
+      this.pillsCountFinished = Math.floor(this.pillsCountFinished);
       return;
     } else {
       this.pillsCountFinished = NaN;
     }
   }
 
-  @HostListener('focus', ['$event.target'])
-  onpillsCountChanges(ev: any) {
 
-    console.log(" all are checked blur", ev);
-
-  }
   onAddMedication() {
     const daysTillPillsFinished = +this.form.value['pills-count'] / (+this.form.value['intake-frequency'] * +this.form.value['dose']);
     console.log(this.form.value['pills-count']);
