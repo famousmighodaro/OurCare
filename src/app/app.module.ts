@@ -18,6 +18,7 @@ import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontaweso
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    FontAwesomeModule
+    FontAwesomeModule,
+    BarcodeScanner,
   ],
   bootstrap: [AppComponent]
 })

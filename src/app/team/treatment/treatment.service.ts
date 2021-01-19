@@ -16,7 +16,7 @@ export class TreatmentService {
   getAllTreatments(): Observable<Medication[]> {
     return this.firestore.collection<Medication>('treatment').snapshotChanges().pipe(
       map(actions => actions.map(responseData => {
-        const data = responseData.payload.doc.data();
+        const data = responseData.payload.doc.data() as Medication;
         const id = responseData.payload.doc.id;
         return { id, ...data };
       }))

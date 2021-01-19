@@ -5,9 +5,36 @@
 </ion-header>
 
 <ion-content>
-  <ion-button slots="icon-only" *ngIf="tryme">
-    <ion-icon name="home" slot="icon-only"></ion-icon>
-  </ion-button>
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12" size-sm="8" offset-sm="2">
+        <ion-card *ngFor="let treatment of treatments">
+          <ion-list>
+            <ion-item detail>
+              <ion-label>
+                <h2><strong>{{treatment.treatmentType==="medication"?"Name ":"Hygiene Care Type
+                    "}}</strong>{{treatment.name}}
+                </h2>
+                <div>
+                  <p><strong>Customer Id</strong> {{treatment.customerId}} </p>
+                  <p><strong>Intake Frequency</strong>{{treatment.intakeFrequency}}</p>
+                  <p><strong>Dose(s)</strong> {{treatment.doses}}</p>
+                  <p><strong>Start Date</strong>{{treatment.startDate}}</p>
+                </div>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-card>
+
+
+
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" interface="action-sheet">
     <ion-fab-button>
       <ion-icon name="add"></ion-icon>

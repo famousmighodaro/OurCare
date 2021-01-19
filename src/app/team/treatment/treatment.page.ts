@@ -5,6 +5,7 @@ import { CreateHygieneCareComponent } from './create-hygiene-care/create-hygiene
 import { CreateMedicationComponent } from './create-medication/create-medication.component';
 import { MedicationPage } from './medication/medication.page';
 import { TreatmentService } from './treatment.service';
+import { Customer } from '../dash-board/customers/customer.model';
 
 
 
@@ -14,7 +15,8 @@ import { TreatmentService } from './treatment.service';
   styleUrls: ['./treatment.page.scss'],
 })
 export class TreatmentPage implements OnInit {
-  tryme = false;
+  treatments: any[] = [];
+  customers: Customer[] = [];
   constructor(
     private addMedicationModalCtrl: ModalController,
     private actionSheetCtrl: ActionSheetController,
@@ -23,7 +25,13 @@ export class TreatmentPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getTreatments();
+  }
 
+  getTreatments() {
+    this.treatmentService.getAllTreatments().subscribe(resultData => {
+      this.treatments = resultData;
+    });
   }
 
   addMedication() {

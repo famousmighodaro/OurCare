@@ -2,6 +2,10 @@ import { Component, HostBinding, HostListener, Input, OnInit, ViewChild } from '
 import { ModalController } from '@ionic/angular';
 import { Medication } from '../medication/medication.model';
 import { NgForm } from '@angular/forms';
+import { Customer } from '../../dash-board/customers/customer.model';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { CustomerService } from '../../dash-board/customers/create-customer/customer.service';
+import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 
 @Component({
   selector: 'app-create-medication',
@@ -15,15 +19,64 @@ export class CreateMedicationComponent implements OnInit {
   medication: Medication = {} as Medication;
   pillsCountFinished: number;
   searchCustomer: string;
+  customers: Customer[] = [];
+  encodeData: any;
+  scannedMedication: Pills[] = [{
+    pzn: null,
+    name: null,
+    pillsCount: null
+  }];
+  scannedData: string;
+  barcodeScannerOptions: BarcodeScannerOptions;
 
   showPillsIntakeDetail = false;
 
   constructor(
-    private modalCtrl: ModalController
-  ) { }
+    private modalCtrl: ModalController,
+    private firestore: AngularFirestore,
+    private customerService: CustomerService,
+    private barcodeScanner: BarcodeScanner
+  ) {
+    this.getCustomers();
+    this.barcodeScannerOptions = {
+      showTorchButton: true,
+      showFlipCameraButton: true
+    };
+  }
 
-  ngOnInit() { }
+  ngOnInit() {
 
+  }
+  scanBarcode() {
+    this.barcodeScanner.scan().then(barcodeData => {
+
+      this.scannedData = barcodeData.text.substring(1);
+      this.getMedication(barcodeData.text.substring(1));
+      return barcodeData.text.substring(1);
+
+    }).then(resultDatas => {
+      alert(`PZN: ${resultDatas}`)
+    }).catch(err => {
+      console.log("barcode Error " + err);
+      return;
+    });
+
+
+  }
+  getMedication(seachInput: string) {
+    this.firestore.collection<any>('pills', ref => ref.where('pzn', '==', seachInput)).valueChanges().subscribe(resultData => {
+      this.scannedMedication = resultData;
+      console.log(this.scannedMedication);
+    })
+
+  }
+  getCustomers() {
+    this.customerService.getAllCustomers().subscribe(resultData => {
+      console.log(resultData);
+      this.customers = resultData;
+      console.log(this.customers);
+    });
+  }
   onCancelMedicationForm() {
     this.modalCtrl.dismiss(null, 'cancleMedicationForm', 'medicationModal')
   }
@@ -56,11 +109,11 @@ export class CreateMedicationComponent implements OnInit {
     }
   }
 
-
+  life = "we are one";
   onAddMedication() {
     const daysTillPillsFinished = +this.form.value['pills-count'] / (+this.form.value['intake-frequency'] * +this.form.value['dose']);
     console.log(this.form.value['pills-count']);
-    console.log("checking for doses", this.form.value['doses']);
+    console.log("customer id: ", this.form.value['customer-id'],);
     console.log((this.form.value['pills-count'] / (this.form.value['doses'] * this.form.value['day-intake-frequency'])) * this.form.value['intake-frequency']);
     const medicationData = new Medication(
       'medication',
@@ -78,4 +131,11 @@ export class CreateMedicationComponent implements OnInit {
     this.modalCtrl.dismiss(medicationData, 'addMedication', 'medicationModal')
   }
 
+}
+
+
+export interface Pills {
+  pzn: string;
+  name: string;
+  pillsCount: string;
 }
