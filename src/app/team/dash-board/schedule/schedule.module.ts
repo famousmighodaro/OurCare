@@ -11,6 +11,8 @@ import { AngularFireModule } from '@angular/fire';
 
 import { SchedulePage } from './schedule.page';
 import { environment } from 'src/environments/environment.prod';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 
 @NgModule({
@@ -23,6 +25,11 @@ import { environment } from 'src/environments/environment.prod';
     ReactiveFormsModule,
     HttpClientModule,
     HttpClientJsonpModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
+
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule
   ],

@@ -32,6 +32,8 @@
               }
             ],
             "styles": [
+              "node_modules/angular-calendar/css/angular-calendar.css",
+              "node_modules/angular-calendar/css/angular-calendar.css",
               {
                 "input": "src/theme/variables.scss"
               },
@@ -99,7 +101,10 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "styles": [],
+            "styles": [
+              "node_modules/angular-calendar/css/angular-calendar.css",
+              "node_modules/angular-calendar/css/angular-calendar.css"
+            ],
             "scripts": [],
             "assets": [
               {

@@ -1,0 +1,9 @@
+for (let i = 0; i < values.length; i++) {
+    const start = new Date(new Date(new Date(0).setUTCSeconds(values[i].start['seconds'])).setHours(0, 0, 0, 0));
+
+    const end = new Date(values[i].end)
+    const day = new Date()
+    console.log(start);
+    this.startDates.push(start);
+    this.events.push({ day: start, ...values[i] })
+};

@@ -19,6 +19,8 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
     MbscModule, BrowserModule, FormsModule, IonicModule.forRoot(), AppRoutingModule,
     MbscModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+
   ],
   providers: [
     StatusBar,
