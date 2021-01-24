@@ -9,6 +9,8 @@ import { SegmentChangeEventDetail } from '@ionic/core';
 import { CalendarView } from 'angular-calendar';
 import * as _ from 'lodash';
 import { cloneDeep, sortBy } from 'lodash';
+import { ModalController } from '@ionic/angular';
+import { CreateScheduleComponent } from './create-schedule/create-schedule.component';
 
 
 
@@ -18,23 +20,24 @@ import { cloneDeep, sortBy } from 'lodash';
   styleUrls: ['./schedule.page.scss'],
 })
 export class SchedulePage implements OnInit {
-  public scheduleList: Observable<any[]>;
+
   events: any[] = [];
   view = "day";
   eventDate: Date[];
   group: any[] = [];
   weekEvent: any = {}
-  @ViewChild('scheduleDay')
-  daily: string;
 
 
-  viewDate: Date = new Date();
-  constructor(private http: HttpClient, private firestore: AngularFirestore,
-    private scheduleService: ScheduleService) { }
+
+
+  constructor(
+    private firestore: AngularFirestore,
+    private scheduleService: ScheduleService,
+    private createScheduleModal: ModalController,
+  ) { }
 
 
   check(): void {
-
     /* this.firestore.collection('schedules').valueChanges().subscribe((res: any) =>{
       
      this.events = res;
@@ -44,29 +47,17 @@ export class SchedulePage implements OnInit {
     const firstDayOfWeek = todayDate.getDate() - (todayDate.getDay() - 1);
     const startOfWeekDate = new Date(todayDate.setDate(firstDayOfWeek));
     const endOfWeekDate = new Date(todayDate.setDate(lastDayofWeek));
-
     console.log('the week start: ' + startOfWeekDate.toString() + " and end on these day: " + endOfWeekDate.getUTCDate());
-
-
-
-
-
   }
 
 
   ngOnInit() {
     this.scheduleService.getTodaySchedule().subscribe(values => {
       this.events = values;
-
       /* values.forEach(value => {
         this.events.push({ start: new Date(value.start), end: new Date(value.end), title: value.title });
       }); */
     });
-
-  }
-
-  details(schedules: any) {
-    console.log("checking for details", schedules);
   }
 
   scheduleViewChange(ev: CustomEvent<SegmentChangeEventDetail>) {
@@ -97,18 +88,23 @@ export class SchedulePage implements OnInit {
       this.weekEvent = _.groupBy(this.events, n => {
         return [n.day];
       })
-      console.log(this.events)
       for (let key in this.weekEvent) {
         if (this.weekEvent.hasOwnProperty(key)) {
-          this.group.push({ key, values: this.weekEvent[key] })
-
+          this.group.push({ key, values: this.weekEvent[key] });
         }
       }
-
-
     });
+  }
 
 
+  onOpenNewScheduleForm() {
+    this.createScheduleModal.create({
+      component: CreateScheduleComponent,
+      id: 'newScheduleModalForm',
+    }).then(modalEle => {
+      modalEle.present();
+      return modalEle.onDidDismiss();
+    })
   }
 
 }

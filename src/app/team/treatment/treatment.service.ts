@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Medication } from './medication/medication.model';
 import { Observable, pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Customer } from '../dash-board/customers/customer.model';
 
 @Injectable({
   providedIn: 'root'
@@ -44,4 +45,17 @@ export class TreatmentService {
     });
   }
 
+  getTreatmentsByCustomerId(customerId: string): Observable<Medication[]> {
+    return this.firestore.collection<Medication>('treatment', ref => ref.where('customerId', '==', customerId)).snapshotChanges().pipe(
+      map(actions => actions.map(responseData => {
+        const data = responseData.payload.doc.data() as Medication;
+        const id = responseData.payload.doc.id;
+        return { id, ...data };
+      }))
+    )
+  }
+
+  getTreatment(id: string): Observable<Medication[]> {
+    return this.firestore.collection<Medication>('treatment', ref => ref.where('__name__', '==', id)).valueChanges();
+  }
 }

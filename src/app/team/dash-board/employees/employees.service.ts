@@ -39,6 +39,22 @@ export class EmployeesService {
   }
 
   filterEmployeeBy(filterBy: string): Observable<Employee[]> {
-    return this.firestore.collection<Employee>('users', ref => ref.where('level', '==', filterBy)).valueChanges();
+    return this.firestore.collection<Employee>('users', ref => ref.where('level', '==', filterBy)).snapshotChanges().pipe(
+      map(actions => actions.map(responseData => {
+        const data = responseData.payload.doc.data();
+        const id = responseData.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+  }
+
+  getEmployeesByLevel(level: number): Observable<Employee[]> {
+    return this.firestore.collection<Employee>('users', ref => ref.where('level', '>=', level)).snapshotChanges().pipe(
+      map(actions => actions.map(responseData => {
+        const data = responseData.payload.doc.data();
+        const id = responseData.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
   }
 }

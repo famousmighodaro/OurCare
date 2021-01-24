@@ -31,8 +31,6 @@ export class CustomersPage implements OnInit {
         componentProps: { msg: 'we are welcome' },
         id: "newCustomerModalForm"
       },
-
-
     ).then(modalEle => {
       modalEle.present();
       return modalEle.onDidDismiss();

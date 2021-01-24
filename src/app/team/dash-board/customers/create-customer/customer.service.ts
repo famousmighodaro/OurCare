@@ -31,4 +31,13 @@ export class CustomerService {
         return { id, ...data }
       })));
   }
+
+  getCustomer(id: string): Observable<Customer[]> {
+    return this.firestore.collection<Customer>('customers', ref => ref.where('__name__', '==', id)).snapshotChanges().pipe(
+      map(actions => actions.map(resultData => {
+        const data = resultData.payload.doc.data() as Customer;
+        const id = resultData.payload.doc.id;
+        return { id, ...data }
+      })));
+  }
 }

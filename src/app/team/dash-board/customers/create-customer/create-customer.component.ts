@@ -30,7 +30,9 @@ export class CreateCustomerComponent implements OnInit {
           this.customerForm.value['first-name'],
           this.customerForm.value['last-name'],
           this.customerForm.value['date-of-birth'],
-          +this.customerForm.value['level']
+          +this.customerForm.value['level'],
+          this.customerForm.value['address'],
+
         )
       }
     }, 'onCreateNewCustomer', 'newCustomerModalForm');

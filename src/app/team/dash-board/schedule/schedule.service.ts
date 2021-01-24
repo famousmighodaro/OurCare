@@ -57,5 +57,8 @@ export interface ISchedule {
   color?: string;
   start: any;
   end: any;
+  duration?: number;
+  address: string;
+  completed: boolean;
   task?: Array<any>;
 }

@@ -13,4 +13,8 @@ export class EmployeeLevelService {
   getEmployeeLevels(): Observable<EmployeeLevel[]> {
     return this.firestore.collection<EmployeeLevel>('level').valueChanges();
   }
+
+  getEmployeeLevel(level: number): Observable<EmployeeLevel[]> {
+    return this.firestore.collection<EmployeeLevel>('level', ref => ref.where('id', '>=', +level)).valueChanges();
+  }
 }

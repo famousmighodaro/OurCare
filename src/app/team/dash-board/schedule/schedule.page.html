@@ -4,6 +4,12 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Schedule</ion-title>
+
+    <ion-fab vertical="center" horizontal="end" edge slot="fixed" slot="end">
+      <ion-fab-button (click)="onOpenNewScheduleForm()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
   </ion-toolbar>
 </ion-header>
 

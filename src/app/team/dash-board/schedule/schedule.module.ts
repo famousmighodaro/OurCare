@@ -13,6 +13,7 @@ import { SchedulePage } from './schedule.page';
 import { environment } from 'src/environments/environment.prod';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { CreateScheduleComponent } from './create-schedule/create-schedule.component';
 
 
 @NgModule({
@@ -33,6 +34,6 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule
   ],
-  declarations: [SchedulePage]
+  declarations: [SchedulePage, CreateScheduleComponent]
 })
 export class SchedulePageModule { }
