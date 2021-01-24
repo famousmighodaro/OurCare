@@ -14,7 +14,7 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-button (click)="tour()">increment</ion-button>
   <ion-button (click)="check()">check data</ion-button>
 
   <ion-segment (ionChange)="scheduleViewChange($event)" color="primary" value="day">
@@ -31,35 +31,50 @@
       <ion-col size="12" size-sm="8" offset-sm="2">
 
         <div *ngIf="view=='day'">
-          <ion-list *ngFor="let event of events" class="ion-no-margin" #scheduleDay class="letbe">
-            <ion-item class="ion-no-margin" class="letbe">
-              <label>
-                <h4>{{event.title}}</h4>
-                <small class="ion-margin-end">Start: {{event.start.seconds*1000 | date: "shortTime" }}</small>
-                <small class="ion-margin-start">End: {{event.end.seconds*1000 | date: "shortTime" }}</small>
-              </label>
-            </ion-item>
+          <ion-list class="ion-no-margin" #scheduleDay class="letbe">
+            <ion-item-sliding *ngFor="let event of events" #slidingItem (click)="onShowScheduleDetails(event)">
+              <ion-card [color]="event.color">
+                <ion-card-header>
+                  <ion-card-title>{{event.start.seconds*1000 | date: "HH:mm"}} - {{event.end.seconds*1000 | date:
+                    "HH:mm"}} </ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                  <app-day-view-item [event]="event"></app-day-view-item>
+
+                </ion-card-content>
+              </ion-card>
+            </ion-item-sliding>
           </ion-list>
         </div>
 
-
-
-
-
-
-
         <div *ngIf="view=='week'">
           <div *ngFor="let schedul of group">
-            <h1>{{ schedul.key | date: "mediumDate"}}</h1>
-            <ion-list *ngFor="let scheduleArray of schedul.values" class="ion-no-margin" #scheduleDay class="letbe">
-              <ion-item class="ion-no-margin" class="letbe">
-                <label>
-                  <h4>{{scheduleArray.title}}</h4>
-                  <small class="ion-margin-end">Start: {{scheduleArray.start.seconds*1000 | date: "shortTime" }}</small>
-                  <small class="ion-margin-start">End: {{scheduleArray.end.seconds*1000 | date: "shortTime" }}</small>
-                </label>
-              </ion-item>
-            </ion-list>
+            <ion-card>
+              <ion-card-header color="light">
+                <ion-card-title>{{ schedul.key | date: "mediumDate"}}</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+
+                <ion-list *ngFor="let scheduleArray of schedul.values" class="ion-no-margin" #scheduleDay class="letbe">
+                  <ion-card>
+                    <ion-header color="light">
+                      <ion-card-title>{{scheduleArray.title}}</ion-card-title>
+                    </ion-header>
+                    <ion-card-content>
+                      <ion-item class="ion-no-margin" class="letbe" (click)="onShowScheduleDetails(scheduleArray)">
+                        <label>
+                          <h4></h4>
+                          <small class="ion-margin-end">Start: {{scheduleArray.start.seconds*1000 | date: "shortTime"
+                            }}</small>
+                          <small class="ion-margin-start">End: {{scheduleArray.end.seconds*1000 | date: "shortTime"
+                            }}</small>
+                        </label>
+                      </ion-item>
+                    </ion-card-content>
+                  </ion-card>
+                </ion-list>
+              </ion-card-content>
+            </ion-card>
           </div>
         </div>
       </ion-col>

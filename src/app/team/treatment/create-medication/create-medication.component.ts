@@ -112,23 +112,29 @@ export class CreateMedicationComponent implements OnInit {
   life = "we are one";
   onAddMedication() {
     const daysTillPillsFinished = +this.form.value['pills-count'] / (+this.form.value['intake-frequency'] * +this.form.value['dose']);
-    console.log(this.form.value['pills-count']);
-    console.log("customer id: ", this.form.value['customer-id'],);
-    console.log((this.form.value['pills-count'] / (this.form.value['doses'] * this.form.value['day-intake-frequency'])) * this.form.value['intake-frequency']);
-    const medicationData = new Medication(
-      'medication',
-      this.form.value['name'],
-      this.form.value['pills-count'],
-      this.form.value['intake-frequency'],
-      this.form.value['doses'],
-      this.form.value['customer-id'],
-      this.form.value['staff-level'],
-      this.form.value['start-date'],
-      this.form.value['day-intake-frequency'],
-      this.pillsCountFinished,
-      this.form.value['pills-reminder'],
-      this.form.value['pzn'])
-    this.modalCtrl.dismiss(medicationData, 'addMedication', 'medicationModal')
+    let medicationData: Medication
+    this.customerService.getCustomer(this.form.value['customer-id']).subscribe(respons => {
+      medicationData = new Medication(
+        'medication',
+        this.form.value['name'],
+        this.form.value['pills-count'],
+        this.form.value['intake-frequency'],
+        this.form.value['doses'],
+        this.form.value['customer-id'],
+        this.form.value['staff-level'],
+        this.form.value['start-date'],
+        respons[0].firstName + " " + respons[0].lastName,
+        this.form.value['day-intake-frequency'],
+        this.pillsCountFinished,
+        this.form.value['pills-reminder'],
+        this.form.value['pzn']
+      )
+      medicationData.customerName = `${respons[0].firstName} ${respons[0].lastName}`;
+      this.modalCtrl.dismiss(medicationData, 'addMedication', 'medicationModal')
+    })
+
+
+
   }
 
 }

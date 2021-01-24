@@ -8,14 +8,11 @@ const routes: Routes = [
     path: '',
     component: LoginPage
   },
-  {
-    path: 'tryme',
-    loadChildren: () => import('./tryme/tryme.module').then( m => m.TrymePageModule)
-  }
+
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class LoginPageRoutingModule {}
+export class LoginPageRoutingModule { }

@@ -1,0 +1,7 @@
+<ion-item class="ion-no-margin" class="letbe" [color]="event.color" detail>
+  <label>
+    <h4>{{event.title}}</h4>
+    <small class="ion-margin-end">Start: {{event.start.seconds*1000 | date: "shortTime" }}</small>
+    <small class="ion-margin-start">End: {{event.end.seconds*1000 | date: "shortTime" }}</small>
+  </label>
+</ion-item>

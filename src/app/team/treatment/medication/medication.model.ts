@@ -9,6 +9,7 @@ export class Medication {
         public customerId: string,
         public staffLevel: number,
         public startDate: Date,
+        public customerName?: string,
         public dayIntakeFrequency?: number,
         public pillsCountFinished?: number,
         public pillsReminder?: number,

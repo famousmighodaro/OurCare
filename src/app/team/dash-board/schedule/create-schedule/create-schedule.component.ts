@@ -9,6 +9,8 @@ import { EmployeeLevelService } from '../../employees/level/employee-level.servi
 import { EmployeeLevel } from '../../employees/level/level.model';
 import { EmployeesService } from '../../employees/employees.service';
 import { Employee } from '../../employees/employee.model';
+import { ISchedule } from '../schedule.service';
+import { title } from 'process';
 
 
 @Component({
@@ -54,6 +56,38 @@ export class CreateScheduleComponent implements OnInit {
     this.modalCtrl.dismiss(null, 'cancelScheduleForm', 'newScheduleModalForm');
   }
 
+  /* id?: string;
+  staffId?: string
+  treatmentId?: string
+  customerId?: string;
+  day?: Date;
+  title: string;
+  color?: string;
+  start: any;
+  end: any;
+  duration?: number;
+  address: string;
+  completed: boolean;
+  task?: Array<any>; */
+  onSubmitScheduleForm() {
+    if (!this.form.valid) {
+      return;
+    }
+    const newSchedule = {
+      staffId: this.form.value['staff-id'],
+      treatmentId: this.form.value['treatment-id'],
+      start: new Date(this.form.value['start-time']),
+      end: new Date(this.form.value['end-time']),
+      title: this.selectedCustomer[0].firstName + " " + this.selectedCustomer[0].lastName,
+      customerId: this.form.value['customer-id'],
+      duration: this.duration,
+      address: this.form.value['address'],
+      completed: false,
+      status: 'in pool',
+    } as ISchedule
+    console.log("I want to create a new schedule")
+    this.modalCtrl.dismiss(newSchedule, 'createSchedule', 'newScheduleModalForm')
+  }
   async onSelectCustomer(value) {
     this.showMedication = true;
     await this.treatmentService.getTreatmentsByCustomerId(value).subscribe(respons => {
@@ -65,9 +99,7 @@ export class CreateScheduleComponent implements OnInit {
     });
 
   }
-  onScheduleForm() {
 
-  }
 
   onStartTimeChange(val) {
     this.diffMinutes()

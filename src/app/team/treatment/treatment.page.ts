@@ -6,6 +6,7 @@ import { CreateMedicationComponent } from './create-medication/create-medication
 import { MedicationPage } from './medication/medication.page';
 import { TreatmentService } from './treatment.service';
 import { Customer } from '../dash-board/customers/customer.model';
+import { CustomerService } from '../dash-board/customers/create-customer/customer.service';
 
 
 
@@ -21,6 +22,7 @@ export class TreatmentPage implements OnInit {
     private addMedicationModalCtrl: ModalController,
     private actionSheetCtrl: ActionSheetController,
     private treatmentService: TreatmentService,
+    private customerService: CustomerService
 
   ) { }
 
@@ -47,7 +49,6 @@ export class TreatmentPage implements OnInit {
     }).then(resultData => {
 
       if (resultData.role === "addMedication") {
-        console.log("result data---- ", resultData.data.doses);
         this.treatmentService.createMedication(resultData.data);
       }
     });

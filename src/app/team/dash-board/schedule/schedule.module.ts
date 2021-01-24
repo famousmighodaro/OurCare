@@ -1,3 +1,4 @@
+import { DayViewItemComponent } from './day-view-item/day-view-item.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,6 +15,8 @@ import { environment } from 'src/environments/environment.prod';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CreateScheduleComponent } from './create-schedule/create-schedule.component';
+import { ScheduleDetailsComponent } from './schedule-details/schedule-details.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -26,6 +29,7 @@ import { CreateScheduleComponent } from './create-schedule/create-schedule.compo
     ReactiveFormsModule,
     HttpClientModule,
     HttpClientJsonpModule,
+    FontAwesomeModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
@@ -34,6 +38,6 @@ import { CreateScheduleComponent } from './create-schedule/create-schedule.compo
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule
   ],
-  declarations: [SchedulePage, CreateScheduleComponent]
+  declarations: [SchedulePage, CreateScheduleComponent, DayViewItemComponent, ScheduleDetailsComponent]
 })
 export class SchedulePageModule { }

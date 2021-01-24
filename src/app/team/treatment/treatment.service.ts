@@ -37,6 +37,7 @@ export class TreatmentService {
         customerId: medication.customerId,
         staffLevel: medication.staffLevel,
         startDate: medication.startDate ? medication.startDate : null,
+        customerName: medication.customerName,
         pillsCountFinished: medication.pillsCountFinished ? medication.pillsCountFinished : NaN,
         pillsReminder: medication.pillsReminder ? medication.pillsReminder : null,
       }
