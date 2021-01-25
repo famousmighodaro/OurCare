@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-login',
@@ -6,10 +8,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
-  constructor() { }
+  @ViewChild('loginForm')
+  form: NgForm;
+  constructor(
+    private loginService: LoginService
+  ) { }
 
   ngOnInit() {
+  }
+
+  onLogin() {
+    this.loginService.login(this.form.value['email'], this.form.value['password'])
   }
 
 }
